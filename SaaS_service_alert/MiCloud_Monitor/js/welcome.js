@@ -123,6 +123,7 @@ type:"GET"
 })	
 }
 function play(){
+	console.log("function play");
 	var x = document.getElementById("myAudio");
 	x.play();
 }

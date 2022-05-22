@@ -51,6 +51,9 @@
         <div class="card-header">
           <i class="fa fa-table"></i> MiTMS TP2NFS
           <button class="btn btn-sm">開啟音效</button>
+          <audio id="myAudio" preload="auto">
+            <source src="aud/alarms01.mp3" type="audio/mpeg">
+            </audio>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -128,6 +131,26 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
 <!--   </div> -->
+
+<script>
+  $('document').ready(function(){
+    // let item = document.getElementsByClassName('odd')
+    // console.log(item);
+    let color = $('.odd:first').attr('style');
+    console.log(color);
+    $('.btn').click(function(){
+      if (color=="background-color:tomato"){
+        play();
+      }else{
+        console.log("music stop");
+        var aud = document.getElementById("myAudio");
+        aud.pause();
+        aud.currentTime = 0;
+      }
+    })
+
+  })
+</script>
 </body>
 
 </html>

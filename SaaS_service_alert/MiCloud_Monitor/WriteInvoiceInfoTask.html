@@ -135,6 +135,25 @@
 	<!-- Custom scripts for this page-->
 	<script src="js/sb-admin-datatables.min.js"></script>
 	<!--   </div> -->
+
+	<script>
+		$('document').ready(function(){
+		  let item = document.getElementsByClassName('odd');
+		  console.log(item);
+		  let color = $('.odd:first').attr('style');
+		  console.log(color);
+		  $('.btn').click(function(){
+			if (color=="background-color:tomato"){
+			  play();
+			}else{
+			  console.log("music stop");
+			  var aud = document.getElementById("myAudio");
+			  aud.pause();
+			  aud.currentTime = 0;
+			}
+		  })
+		})
+	</script>
 </body>
 
 </html>
