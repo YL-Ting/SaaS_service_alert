@@ -131,26 +131,38 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
 <!--   </div> -->
-
-    <script>
-      $('document').ready(function(){
-        // let item = document.getElementsByClassName('odd')
-        // console.log(item);
-        let color = $('.odd:first').attr('style');
-        console.log(color);
-        $('.btn').click(function(){
-          if (color=="background-color:tomato"){
-            play();
-          }else{
-            console.log("music stop");
-            var aud = document.getElementById("myAudio");
-            aud.pause();
-            aud.currentTime = 0;
-          }
-        })
-
-      })
-    </script>
+<script>
+  let isPlay = false;
+  function audioPlay(){
+		console.log("music play");
+		var x = document.getElementById("myAudio");
+		x.play();
+	}
+  function stopAndReset(){
+    console.log("music stop");
+    let aud = document.getElementById("myAudio");
+    aud.pause();
+    aud.currentTime = 0;
+  }
+  $('document').ready(function(){
+    let color = $('.odd:first').attr('style');
+    console.log(color);
+    $('.btn').click(function(){
+    if (color=="background-color:tomato"){
+      if(isPlay){
+        stopAndReset();
+        isPlay = false;
+      }else{
+        audioPlay();
+        isPlay = true;
+      }
+    }else{
+      stopAndReset();
+      isPlay = false;
+    }
+    })
+  })
+</script>
 </body>
 
 </html>

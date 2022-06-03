@@ -12,25 +12,26 @@
 - MiTMSTP2AP01.html
     - [x] create button
     - [x] button function (play music)
-    - [ ] optional beautify
+    - [x] optional beautify
 - MiTMSTP2NFS.html
     - [x] create button
     - [x] button function (play music)
-    - [ ] optional beautify
+    - [x] optional beautify
 - Turnkey.html
     - [x] create button
     - [x] button function (play music)
-    - [ ] optional beautify
+    - [x] optional beautify
 - TurnkeyLogTask.html
     - [x] create button
     - [x] button function (play music)
-    - [ ] optional beautify
+    - [x] optional beautify
 - WriteInvoiceInfoTask.html
     - [x] create button
     - [x] button function (play music)
-    - [ ] optional beautify
+    - [x] optional beautify
 ## Development log
 ---
 - 2022/04/07 - ~~Create empty java project~~
 - 2022/05/11 - Understand the develop detail and create button in all html file
 - 2022/05/22 - all button function ok (use jQuery)
+- 2022/06/06 - fix audio can not stop when playing

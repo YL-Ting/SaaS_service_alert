@@ -69,7 +69,7 @@ $.ajax({
 }).done(function(response){
 	lastdatatime=new Date(response.Observations[0]["phenomenonTime"]).valueOf();
 	if((nowTime-lastdatatime)/60000 > scheduleTime*3){
-		setTimeout(function(){ play() }, 1000);
+	setTimeout(function(){ /*play() */}, 1000);
 		}else{}
 		
 $.each(response.Observations,function(key,value){
@@ -122,8 +122,9 @@ type:"GET"
 
 })	
 }
+
 function play(){
-	console.log("function play");
+	console.log("music play");
 	var x = document.getElementById("myAudio");
 	x.play();
 }

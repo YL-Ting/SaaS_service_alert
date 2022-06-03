@@ -28,9 +28,9 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<!-- Navigation-->
-	  <audio id="myAudio" preload="auto">
-  <source src="aud/alarms01.mp3" type="audio/mpeg">
-  </audio>
+	<audio id="myAudio" preload="auto">
+  		<source src="aud/alarms01.mp3" type="audio/mpeg">
+  	</audio>
 	<!-- Navigation-->
 
 	<!--   <div class="content-wrapper"> -->
@@ -135,23 +135,37 @@
 	<!-- Custom scripts for this page-->
 	<script src="js/sb-admin-datatables.min.js"></script>
 	<!--   </div> -->
-
 	<script>
+		
+		function audioPlay(){
+			console.log("music play");
+			let x = document.getElementById("myAudio");
+			x.play();
+		}
+		function stopAndReset(){
+			console.log("music stop");
+			let aud = document.getElementById("myAudio");
+			aud.pause();
+			aud.currentTime = 0;
+		}
+		let isPlay = false;
 		$('document').ready(function(){
-		  let item = document.getElementsByClassName('odd');
-		  console.log(item);
-		  let color = $('.odd:first').attr('style');
-		  console.log(color);
-		  $('.btn').click(function(){
+			let color = $('.odd:first').attr('style');
+			console.log(color);
+			$('.btn').click(function(){
 			if (color=="background-color:tomato"){
-			  play();
+				if(isPlay){
+					stopAndReset();
+					isPlay = false;
+				}else{
+					audioPlay();
+					isPlay = true;
+				}
 			}else{
-			  console.log("music stop");
-			  var aud = document.getElementById("myAudio");
-			  aud.pause();
-			  aud.currentTime = 0;
+				stopAndReset();
+				isPlay = false;
 			}
-		  })
+			})
 		})
 	</script>
 </body>
