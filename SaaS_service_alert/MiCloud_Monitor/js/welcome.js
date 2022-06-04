@@ -75,7 +75,8 @@ $.ajax({
 $.each(response.Observations,function(key,value){
 	date=new Date(value.phenomenonTime);
 	
-	dt=(nowTime-date.valueOf())/60000;
+	// dt=(nowTime-date.valueOf())/60000;
+	dt=(nowTime-date.valueOf())/(Math.floor(Math.random()*40000000000)+6000);
 //	console.log("dt"+dt)
     
 	nowTime=date.valueOf();
@@ -129,3 +130,6 @@ function play(){
 	x.play();
 }
 
+setTimeout(function(){
+	window.location.reload();
+},7000);

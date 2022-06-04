@@ -34,4 +34,5 @@
 - 2022/04/07 - ~~Create empty java project~~
 - 2022/05/11 - Understand the develop detail and create button in all html file
 - 2022/05/22 - all button function ok (use jQuery)
-- 2022/06/06 - fix audio can not stop when playing
+- 2022/06/03 - fix audio can not stop when playing
+- 2022/06/04 - add refresh page every 7 second and random data display
