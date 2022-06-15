@@ -130,27 +130,15 @@ $.ajax({
 dataType:"json",
 type:"GET"	
 }).done(function(response){
-	// console.log(response);
-	// $.each(response.Datastreams,function(key,value){
-		
 	$.each(response.value,function(ObsKey,ObsValue){
-		// console.log(ObsValue.result);
 		date=new Date(ObsValue.phenomenonTime);
 		tempDate=date.getFullYear()+ "/" + (date.getMonth() + 1) + "/" + date.getDate();
 		tempTime=date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() 
-		// if(ObsValue["name"].includes("發送")){
-		// 	tempstr="發送"
-		// 		}else{tempstr="接收"
-		// 			}
 		tempstr=str[parseInt(Math.floor(Math.random()*2))];
-		// console.log(parseInt(Math.floor(Math.random()*1)));
-		// console.log(tempstr);
 		bgcolor = color[parseInt(Math.random()*3)];
 		$('#MiTMS_TP2AP01').append("<tr style='background-color:"+bgcolor+"'><td>"+tempstr+"</td><td>"+ObsValue.result+"</td><td>"+tempDate+" "+tempTime+"</td></tr>");
 		})
 	})
-
-// })
 }
 
 // function play(){

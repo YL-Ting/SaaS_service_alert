@@ -37,3 +37,4 @@
 - 2022/06/03 - fix audio can not stop when playing
 - 2022/06/04 - add refresh page every 7 second and random data display
 - 2022/06/15 - [1] fix problem : MiTMSTP2AP01.html and MiTMSTP2AP01.html doesn't have data [2] add new function : extract red data and export to csv file
+- 2022/06/16 - delete redundant code
