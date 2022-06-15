@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>MiTMS TP2AP01</title>
+  <title>MiINV-Log批次</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -25,6 +25,9 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
+    <audio id="myAudio" preload="auto">
+  <source src="aud/alarms01.mp3" type="audio/mpeg">
+  </audio>
   <!-- Navigation-->
 
 <!--   <div class="content-wrapper"> -->
@@ -36,8 +39,8 @@
 <!--         <div class="card-body"> -->
 <!--           <canvas id="myAreaChart" width="100%" height="30"></canvas> -->
 <!--         </div> -->
-<!--         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
-      </div>
+<!--          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+<!--       </div> -->
       <!-- Breadcrumbs-->
 <!--       <ol class="breadcrumb"> -->
 <!--         <li class="breadcrumb-item"> -->
@@ -49,35 +52,33 @@
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> MiTMS TP2AP01
-          <button class="btn btn-sm">開啟音效</button>
-          <audio id="myAudio" preload="auto">
-            <source src="aud/alarms01.mp3" type="audio/mpeg">
-            </audio>
+          <i class="fa fa-table"></i> MiINV-Log批次
+          <button id="music" class="btn btn-sm border border-primary">開啟音效</button>
+          <a target="_blank" download="錯誤資料.csv" id="export" class="btn btn-sm border border-primary">匯出錯誤資料</a>
         </div>
         <div class="card-body">
           <div class="table-responsive">
           <script type="text/javascript">
           $(function(){
-        	  MiTMSTP2AP01();
+        	  TurnkeyLogTask();
               })
           </script>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                <th>傳送/接收</th>
-				<th>檔案路徑</th>
-				<th>紀錄時間</th>
+                  <th>排程名稱</th>
+                  <th>回應時間</th>  
+                  <th>與上筆資料間隔時間</th>  
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                <th>傳送/接收</th>
-			 	<th>檔案路徑</th>
-				<th>紀錄時間</th>
+                  <th>排程名稱</th>
+                  <th>回應時間</th>
+                  <th>與上筆資料間隔時間</th>  
                 </tr>
               </tfoot>
-              <tbody id=MiTMS_TP2AP01>
+              <tbody id=TurnkeyLogTask>
 <!--                inputdata -->
               </tbody>
             </table>
@@ -131,38 +132,77 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
 <!--   </div> -->
-<script>
-  let isPlay = false;
-  function audioPlay(){
-		console.log("music play");
-		var x = document.getElementById("myAudio");
-		x.play();
-	}
-  function stopAndReset(){
-    console.log("music stop");
-    let aud = document.getElementById("myAudio");
-    aud.pause();
-    aud.currentTime = 0;
-  }
-  $('document').ready(function(){
-    let color = $('.odd:first').attr('style');
-    console.log(color);
-    $('.btn').click(function(){
-    if (color=="background-color:tomato"){
-      if(isPlay){
-        stopAndReset();
-        isPlay = false;
-      }else{
-        audioPlay();
-        isPlay = true;
+    <script>
+      let isPlay = false;
+      function audioPlay(){
+			  console.log("music play");
+			  var x = document.getElementById("myAudio");
+			  x.play();
+		  }
+      function stopAndReset(){
+        console.log("music stop");
+        let aud = document.getElementById("myAudio");
+        aud.pause();
+        aud.currentTime = 0;
       }
-    }else{
-      stopAndReset();
-      isPlay = false;
-    }
-    })
-  })
-</script>
+      $('document').ready(function(){
+          let color = $('.odd:first').attr('style');
+          console.log(color);
+          $('#music').click(function(){
+          if (color=="background-color:tomato"){
+            if(isPlay){
+              stopAndReset();
+              isPlay = false;
+            }else{
+              audioPlay();
+              isPlay = true;
+            }
+          }else{
+            stopAndReset();
+            isPlay = false;
+          }
+          })
+          $('#export').click(function(){
+            var csvList = [],
+                titleList = [],
+                memberContent = "",
+                csvContent;
+
+            // 取得標題
+            $(".table th").each(function() {
+                titleList.push(this.innerHTML);
+            });
+            csvList.push(titleList);
+
+            // 取得所有資料
+            $(".table tbody > tr").each(function() {
+            var regList = [];
+            if($(this).attr('style')=="background-color:tomato"){
+						$(this).children("td").each(function() {
+							
+								regList.push(this.innerHTML);
+						});
+						csvList.push(regList);
+					  }
+            });
+
+            // 產生 csv 內容
+            csvList.forEach(function(rowArray) {
+            var row = rowArray.join(",");
+            memberContent += row + "\r\n";
+            });
+
+            // 產生 csv Blob
+            csvContent = URL.createObjectURL(new Blob(["\uFEFF" + memberContent], {
+            type: 'text/csv;charset=utf-8;'
+            }));
+
+            // 產生 csv 連結
+            this.href = csvContent;
+            });
+          
+      })
+    </script>
 </body>
 
 </html>

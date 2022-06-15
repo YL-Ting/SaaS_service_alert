@@ -102,33 +102,62 @@ var dt;
 var date;
 var tempDate;
 var tempTime;
+// $.ajax({
+// 	async:false,
+// 	url:""+url+"/Things("+thingId+")?$expand=Datastreams/Observations($select=result,phenomenonTime)",
+// dataType:"json",
+// type:"GET"	
+// }).done(function(response){
+// 	$.each(response.Datastreams,function(key,value){
+// 	$.each(value.Observations,function(ObsKey,ObsValue){
+// 		date=new Date(ObsValue.phenomenonTime);
+// 		tempDate=date.getFullYear()+ "/" + (date.getMonth() + 1) + "/" + date.getDate();
+// 		tempTime=date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() 
+// 		if(value["name"].includes("發送")){
+// 			tempstr="發送"
+// 				}else{tempstr="接收"
+// 					}
+// 		$('#MiTMS_TP2AP01').append("<tr><td>"+tempstr+"</td><td>"+ObsValue.result+"</td><td>"+tempDate+" "+tempTime+"</td></tr>");
+// 		})
+// 	})
+
+// })	
+str = ["發送","接收"];
+color = ["tomato","yellow","yellowgreen"];
 $.ajax({
 	async:false,
-	url:""+url+"/Things("+thingId+")?$expand=Datastreams/Observations($select=result,phenomenonTime)",
+	url:"./Observations.json",
 dataType:"json",
 type:"GET"	
 }).done(function(response){
-	$.each(response.Datastreams,function(key,value){
-	$.each(value.Observations,function(ObsKey,ObsValue){
+	// console.log(response);
+	// $.each(response.Datastreams,function(key,value){
+		
+	$.each(response.value,function(ObsKey,ObsValue){
+		// console.log(ObsValue.result);
 		date=new Date(ObsValue.phenomenonTime);
 		tempDate=date.getFullYear()+ "/" + (date.getMonth() + 1) + "/" + date.getDate();
 		tempTime=date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() 
-		if(value["name"].includes("發送")){
-			tempstr="發送"
-				}else{tempstr="接收"
-					}
-		$('#MiTMS_TP2AP01').append("<tr><td>"+tempstr+"</td><td>"+ObsValue.result+"</td><td>"+tempDate+" "+tempTime+"</td></tr>");
+		// if(ObsValue["name"].includes("發送")){
+		// 	tempstr="發送"
+		// 		}else{tempstr="接收"
+		// 			}
+		tempstr=str[parseInt(Math.floor(Math.random()*2))];
+		// console.log(parseInt(Math.floor(Math.random()*1)));
+		// console.log(tempstr);
+		bgcolor = color[parseInt(Math.random()*3)];
+		$('#MiTMS_TP2AP01').append("<tr style='background-color:"+bgcolor+"'><td>"+tempstr+"</td><td>"+ObsValue.result+"</td><td>"+tempDate+" "+tempTime+"</td></tr>");
 		})
 	})
 
-})	
+// })
 }
 
-function play(){
-	console.log("music play");
-	var x = document.getElementById("myAudio");
-	x.play();
-}
+// function play(){
+// 	console.log("music play");
+// 	var x = document.getElementById("myAudio");
+// 	x.play();
+// }
 
 setTimeout(function(){
 	window.location.reload();
